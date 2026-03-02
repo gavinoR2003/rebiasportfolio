@@ -1,0 +1,8 @@
+You can provide your resume in one of two ways:
+
+- Place a PDF named `resume.pdf` in the `public/` folder so it is served at `/resume.pdf`.
+- Or keep an image in `src/assets/` (for example `src/assets/KylixxResume.png`) — the app will bundle and serve that asset; the Download button will use it directly.
+
+Current project setup: the Download button in the Resume section uses `/resume.pdf` (served from `public/resume.pdf`).
+
+If you'd like to update the resume, replace `public/resume.pdf` or tell me to regenerate it from another source.
