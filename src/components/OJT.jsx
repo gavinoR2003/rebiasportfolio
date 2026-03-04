@@ -1,45 +1,119 @@
 import React, { useState } from 'react';
 
-function OJT() {
-  const certificateImage = '/sample.jpg';
-  const [previewOpen, setPreviewOpen] = useState(false);
+function Certifications() {
+  const [previewImage, setPreviewImage] = useState(null);
 
-  const openPreview = () => setPreviewOpen(true);
-  const closePreview = () => setPreviewOpen(false);
+  const openPreview = (imageSrc) => setPreviewImage(imageSrc);
+  const closePreview = () => setPreviewImage(null);
+
+  const certifications = [
+    {
+      id: 1,
+      title: 'Certificate of Participation',
+      issuer: 'Consolatrix College of Toledo City',
+      date: 'September 17, 2022',
+      description:
+        'Certificate of participation for participating in the College of Computer Studies seminar exhibit with the topic entitled "Introduction to UI/UX Designing".',
+      image: '/cert1.png'
+    },
+    {
+      id: 2,
+      title: 'OJT Documentation 1',
+      issuer: 'On-the-Job Training',
+      date: '2025-2026',
+      description: 'On-the-job training activity documentation.',
+      image: '/ojt1.jpg'
+    },
+    {
+      id: 3,
+      title: 'OJT Documentation 2',
+      issuer: 'On-the-Job Training',
+      date: '2025-2026',
+      description: 'On-the-job training activity documentation.',
+      image: '/ojt2.jpg'
+    },
+    {
+      id: 4,
+      title: 'OJT Documentation 3',
+      issuer: 'On-the-Job Training',
+      date: '2025-2026',
+      description: 'On-the-job training activity documentation.',
+      image: '/ojt3.jpg'
+    },
+    {
+      id: 5,
+      title: 'OJT Documentation 4',
+      issuer: 'On-the-Job Training',
+      date: '2025-2026',
+      description: 'On-the-job training activity documentation.',
+      image: '/ojt4.jpg'
+    }
+  ];
 
   return (
-    <section className="section bg-light" id="ojt">
+    <section className="section" id="certifications">
       <div className="container">
-        <h2>OJT / Internship</h2>
+        <h2 className="text-center mb-4">Certifications & Trainings</h2>
         <div className="row">
-          <div className="col-md-6 mb-4">
-            <div className="card">
-              <div className="card-body">
-                <h5 className="card-title">Mayor's Office</h5>
-                <h6 className="card-subtitle mb-2 text-muted">Encoder/Printer/Digital Designer</h6>
-                <p className="card-text">
-                  <strong>Duration:</strong> November 2 , 2025- [End Date]<br />
-                  <strong>Completion Certificate:</strong>
-                </p>
-
-                <button type="button" className="image-button" onClick={openPreview}>
+          {certifications.map(cert => (
+            <div className="col-md-4 mb-4" key={cert.id}>
+              <div className="card h-100 shadow-sm">
+                <button
+                  type="button"
+                  className="image-button"
+                  onClick={() => openPreview(cert.image)}
+                  style={{ border: "none", background: "none", padding: 0 }}
+                >
                   <img
-                    src={certificateImage}
-                    alt="OJT completion certificate"
-                    className="certificate-thumb"
-                    loading="lazy"
+                    src={cert.image}
+                    className="card-img-top"
+                    alt={cert.title}
+                    style={{ height: "250px", objectFit: "cover" }}
                   />
                 </button>
+                <div className="card-body">
+                  <h5 className="card-title">{cert.title}</h5>
+                  <p className="card-text">
+                    <strong>Issuer:</strong> {cert.issuer} <br />
+                    <strong>Date:</strong> {cert.date} <br /><br />
+                    {cert.description}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
 
-      {previewOpen && (
-        <div className="lightbox-overlay" onClick={closePreview}>
-          <div className="lightbox-content" onClick={(e) => e.stopPropagation()}>
-            <img src={certificateImage} alt="OJT completion certificate" />
+      {previewImage && (
+        <div
+          onClick={closePreview}
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0,0,0,0.8)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 9999
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            style={{ maxWidth: "90%", maxHeight: "90%" }}
+          >
+            <img
+              src={previewImage}
+              alt="Preview"
+              style={{
+                width: "100%",
+                height: "auto",
+                borderRadius: "10px"
+              }}
+            />
           </div>
         </div>
       )}
@@ -47,4 +121,4 @@ function OJT() {
   );
 }
 
-export default OJT;
+export default Certifications;
